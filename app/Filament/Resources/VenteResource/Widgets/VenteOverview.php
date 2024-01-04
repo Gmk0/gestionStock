@@ -18,6 +18,7 @@ class VenteOverview extends BaseWidget
     {
         return [
             Stat::make('Total ventes', number_format(vente::all()->sum('montant')).' CDF'),
+            Stat::make('Total Paquets', number_format(vente::all()->sum('qte_pqt')) . ' PQT'),
             //
         ];
     }

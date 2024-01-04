@@ -4,7 +4,9 @@ namespace App\Providers\Filament;
 
 use App\Filament\Resources\AchatResource\Widgets\AchatOverview;
 use App\Filament\Resources\VenteResource\Widgets\VenteOverview;
+use App\Filament\Widgets\ChartView;
 use App\Filament\Widgets\CommandeView;
+use App\Filament\Widgets\VenteChart;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -42,6 +44,8 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                CommandeView::class,
+               ChartView::class,
+               //VenteChart::class
               
             ])
             ->middleware([
