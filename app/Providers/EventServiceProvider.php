@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Achat;
+use App\Models\vente;
+use App\Observers\AchatObserver;
+use App\Observers\VenteObserve;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -26,6 +30,9 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+
+        Achat::observe(AchatObserver::class);
+        vente::observe(VenteObserve::class);
     }
 
     /**

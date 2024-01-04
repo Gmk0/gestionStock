@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('histo_prixes', function (Blueprint $table) {
             $table->id();
+
+            $table->float('prix_pqt')->nullable();
+            $table->float('prix_unit')->nullable();
+            $table->float('taux')->nullable();
+            $table->boolean('activer')->default(false);
             $table->timestamps();
         });
     }

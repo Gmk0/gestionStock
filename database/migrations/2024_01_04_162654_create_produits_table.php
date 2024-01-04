@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('produits', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
+            $table->float('qte_pc')->default(0);
+            $table->float('qte_pqt')->default(0);
+            $table->string('illustration')->nullable();
+
             $table->timestamps();
         });
     }

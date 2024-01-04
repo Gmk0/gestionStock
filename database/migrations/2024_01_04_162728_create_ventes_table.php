@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('ventes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('produit_id');
+            $table->float('qte_pc')->nullable();
+            $table->float('qte_pqt')->nullable();
+            $table->float('montant')->nullable();
+            $table->foreignId('histoPrix_id')->nullable();
+            $table->dateTime('date_vente')->nullable();
+
             $table->timestamps();
         });
     }
