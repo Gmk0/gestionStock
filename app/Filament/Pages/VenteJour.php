@@ -42,8 +42,9 @@ class VenteJour extends Page implements HasForms
 
         return $form->schema([
             Grid::make('2')->schema([
-                Select::make('produit_id')
-                    ->options(Produit::all()->pluck('nom', 'id')),
+                Select::make('produit_id')->label('Produit')
+                    ->options(Produit::all()->pluck('nom', 'id'))
+                    ->native(false),
                 TextInput::make('qte_pc')
                     ->live()
                     ->numeric(),
@@ -53,8 +54,7 @@ class VenteJour extends Page implements HasForms
                 ->native(false),
                 TextInput::make('montant')
                     ->currencyMask(thousandSeparator: ',', decimalSeparator: '.', precision: 2)
-                    ->required()
-                    ->disabled(),
+                    ->required(),
                 DateTimePicker::make('date_vente'),
 
             ]),
@@ -81,7 +81,7 @@ class VenteJour extends Page implements HasForms
                     'qte_pc' => $this->qte_pc,
                     'qte_pqt' =>round($this->qte_pc / 12),
                     'montant'=>$this->montant,
-                    'histoPrix_id' => $price->id,
+                    'histoPrix_id' => $price->id??null,
                     'date_vente' => $this->date_vente,
                 ];
             

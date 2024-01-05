@@ -28,11 +28,14 @@ class AchatResource extends Resource
             ->schema([
                 Forms\Components\Select::make('produit_id')
                     ->options(Produit::all()->pluck('nom', 'id'))
+                    ->native(false)
                     ,
                 Forms\Components\TextInput::make('qte_pqt')
                     ->numeric(),
                 Forms\Components\TextInput::make('montant')
-                    ->numeric(),
+                ->currencyMask(thousandSeparator: ',', decimalSeparator: '.', precision: 2)
+                ->required()
+                ->numeric(),
                 Forms\Components\DateTimePicker::make('date_paiement'),
 
 
@@ -49,9 +52,13 @@ class AchatResource extends Resource
 
                 Tables\Columns\TextColumn::make('produit.nom')
                     ->numeric()
+                    
                     ,
               
                 Tables\Columns\TextColumn::make('qte_pqt')
+            ->summarize(Sum::make()
+            
+                ->label('Total Paquet'))
                     ->numeric()
                     ,
                 Tables\Columns\TextColumn::make('montant')
@@ -60,13 +67,14 @@ class AchatResource extends Resource
 
                 ->summarize(Sum::make()
                 ->money('CDF')
-                    ->label('Total vente'))
+                    ->label('Total Commande'))
              
                     ,
                 Tables\Columns\TextColumn::make('date_paiement')
                     ->dateTime()
                     ,
-                Tables\Columns\TextColumn::make('status')
+                Tables\Columns\SelectColumn::make('status')
+                ->options(['Livre'=> 'Livré','en attente'=>'En attente'])
                     ->searchable(),
                 
                 Tables\Columns\TextColumn::make('created_at')

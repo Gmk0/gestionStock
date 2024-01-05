@@ -10,6 +10,8 @@ use Flowframe\Trend\TrendValue;
 class ChartView extends ChartWidget
 {
     protected static ?string $heading = 'Chart';
+    protected int | string | array $columnSpan = 2;
+    protected static ?int $sort=3;
 
     protected function getFilters(): ?array
     {

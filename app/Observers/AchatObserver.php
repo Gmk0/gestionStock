@@ -16,10 +16,15 @@ class AchatObserver
 
         $produit=Produit::find($achat->produit_id);
 
-        $produit->qte_pqt += $achat->qte_pqt;
-        $produit->qte_pc += $achat->qte_pqt *12;
+        if (!empty($achat->qte_pqt))
+        {
 
-        $produit->update();
+            $produit->qte_pqt += $achat->qte_pqt;
+            $produit->qte_pc += $achat->qte_pqt * 12;
+
+            $produit->update();
+        }
+       
     }
 
     /**
@@ -39,6 +44,7 @@ class AchatObserver
 
         $produit = Produit::find($achat->produit_id);
 
+        
         $produit->qte_pqt -= $achat->qte_pqt;
         $produit->qte_pc -= $achat->qte_pqt * 12;
 

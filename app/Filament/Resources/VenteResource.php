@@ -76,6 +76,9 @@ class VenteResource extends Resource
                     ->numeric(),
 
                 Tables\Columns\TextColumn::make('qte_pqt')
+            ->summarize(Sum::make()
+          
+                ->label('Total Paquet'))
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('montant')

@@ -15,8 +15,14 @@ class VenteObserve
 
         $produit = Produit::find($vente->produit_id);
 
-        $produit->qte_pqt -= $vente->qte_pqt;
-        $produit->qte_pc -= $vente->qte_pc;
+
+        if (!empty($vente->qte_pqt)) {
+
+
+            $produit->qte_pqt -= $vente->qte_pqt;
+            $produit->qte_pc -= $vente->qte_pc;
+
+        }
 
         $produit->update();
         //
