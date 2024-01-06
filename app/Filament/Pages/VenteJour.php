@@ -35,6 +35,7 @@ class VenteJour extends Page implements HasForms
     public $produit_id;
     public function mount()
     {
+
         $this->form->fill();
     }
     public function form(Form $form): Form
@@ -58,7 +59,7 @@ class VenteJour extends Page implements HasForms
                 DateTimePicker::make('date_vente'),
 
             ]),
-            
+
             ]);
     }
 
@@ -84,9 +85,9 @@ class VenteJour extends Page implements HasForms
                     'histoPrix_id' => $price->id??null,
                     'date_vente' => $this->date_vente,
                 ];
-            
-            
-     
+
+
+
 
             $vente=vente::create($data);
 
@@ -104,8 +105,8 @@ class VenteJour extends Page implements HasForms
                 ->send();
 
         }
-       
-    
+
+
 
 
     }
@@ -114,7 +115,7 @@ class VenteJour extends Page implements HasForms
     {
 
      $this->reset('montant', 'produit_id', 'qte_pc', 'prix', 'date_vente');
-   
+
     }
 
     protected function sendNotification(): void
