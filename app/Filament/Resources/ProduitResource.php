@@ -29,6 +29,9 @@ class ProduitResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('nom')
                     ->required(),
+            Forms\Components\Select::make('type')
+            ->options(['boisson', 'autres'])
+            ->native(false)
 
 
 
@@ -47,7 +50,8 @@ class ProduitResource extends Resource
                 Tables\Columns\TextColumn::make('qte_pqt')
                     ->numeric()
                     ->sortable(),
-             
+
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

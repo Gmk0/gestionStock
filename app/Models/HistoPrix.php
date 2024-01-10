@@ -11,7 +11,7 @@ class HistoPrix extends Model
 
 
 
-    protected $fillable=['prix_pqt', 'prix_unit', 'taux', 'activer'];
+    protected $fillable=['prix_pqt', 'prix_unit','benefice', 'taux', 'activer'];
 
     public function Vente()
     {

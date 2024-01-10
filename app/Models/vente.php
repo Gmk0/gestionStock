@@ -10,7 +10,7 @@ class vente extends Model
     use HasFactory;
 
 
-    protected $fillable=['produit_id', 'qte_pc','montant', 'qte_pqt', 'histoPrix_id', 'date_vente'];
+    protected $fillable=['produit_id', 'benefice','qte_pc','montant', 'qte_pqt', 'histoPrix_id', 'date_vente'];
 
     public function produit()
     {
@@ -18,11 +18,11 @@ class vente extends Model
     }
 
     protected $casts=[
-        'date_vente'=>'datetime',
+        'date_vente'=>'date',
 
 
         ];
-    
+
         public function histoPrix()
         {
             return $this->belongsTo(HistoPrix::class, 'histoPrix_id');

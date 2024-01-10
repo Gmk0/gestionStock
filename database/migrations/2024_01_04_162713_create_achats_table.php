@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('produit_id');
             $table->float('qte_pqt')->nullable();
-
             $table->float('montant')->nullable();
             $table->dateTime('date_paiement')->nullable();
             $table->enum('status',['Livre','en attente'])->default('en attente');

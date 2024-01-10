@@ -17,8 +17,9 @@ return new class extends Migration
             $table->float('qte_pc')->nullable();
             $table->float('qte_pqt')->nullable();
             $table->float('montant')->nullable();
+            $table->float('benefice')->nullable();
             $table->foreignId('histoPrix_id')->nullable();
-            $table->dateTime('date_vente')->nullable();
+            $table->date('date_vente')->nullable();
 
             $table->timestamps();
         });

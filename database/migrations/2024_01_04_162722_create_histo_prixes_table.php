@@ -17,6 +17,7 @@ return new class extends Migration
             $table->float('prix_pqt')->nullable();
             $table->float('prix_unit')->nullable();
             $table->float('taux')->nullable();
+            $table->float('benefice')->nullable();
             $table->boolean('activer')->default(false);
             $table->timestamps();
         });

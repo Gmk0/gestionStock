@@ -28,7 +28,7 @@ class HistoPrixResource extends Resource
                     ->numeric(),
                 Forms\Components\TextInput::make('prix_unit')
                     ->numeric(),
-                Forms\Components\TextInput::make('taux')
+                Forms\Components\TextInput::make('benefice')
                     ->numeric(),
                 Forms\Components\Toggle::make('activer')
                     ->required(),
@@ -45,7 +45,7 @@ class HistoPrixResource extends Resource
                 Tables\Columns\TextColumn::make('prix_unit')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('taux')
+                Tables\Columns\TextColumn::make('benefice')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\IconColumn::make('activer')

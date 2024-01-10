@@ -17,6 +17,7 @@ return new class extends Migration
             $table->float('qte_pc')->default(0);
             $table->float('qte_pqt')->default(0);
             $table->string('illustration')->nullable();
+            $table->enum('type', ['boisson', 'autres'])->default('boisson');
 
             $table->timestamps();
         });
