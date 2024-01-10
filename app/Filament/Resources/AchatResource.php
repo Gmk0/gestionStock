@@ -30,7 +30,7 @@ class AchatResource extends Resource
                     ->options(Produit::all()->pluck('nom', 'id'))
                     ->native(false)
                     ,
-                Forms\Components\TextInput::make('qte_pqt')
+                Forms\Components\TextInput::make('qte_pqt')->label('Quantite paquet')->hint('Autre que boisson rien mettre')
                     ->numeric(),
                 Forms\Components\TextInput::make('montant')
                 ->currencyMask(thousandSeparator: ',', decimalSeparator: '.', precision: 2)
@@ -52,12 +52,12 @@ class AchatResource extends Resource
 
                 Tables\Columns\TextColumn::make('produit.nom')
                     ->numeric()
-                    
+
                     ,
-              
+
                 Tables\Columns\TextColumn::make('qte_pqt')
             ->summarize(Sum::make()
-            
+
                 ->label('Total Paquet'))
                     ->numeric()
                     ,
@@ -68,7 +68,7 @@ class AchatResource extends Resource
                 ->summarize(Sum::make()
                 ->money('CDF')
                     ->label('Total Commande'))
-             
+
                     ,
                 Tables\Columns\TextColumn::make('date_paiement')
                     ->dateTime()
@@ -76,7 +76,7 @@ class AchatResource extends Resource
                 Tables\Columns\SelectColumn::make('status')
                 ->options(['Livre'=> 'Livré','en attente'=>'En attente'])
                     ->searchable(),
-                
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
