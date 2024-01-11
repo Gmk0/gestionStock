@@ -8,7 +8,7 @@
 
    <div style="margin:20px 0;">
 
-    <x-filament::button type="submit">
+    <x-filament::button type="submit" icon="heroicon-m-plus">
         Ajouter
     </x-filament::button>
 
@@ -17,8 +17,8 @@
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                 <div class="overflow-hidden">
-                    <table class="min-w-full text-left text-sm font-light">
-                        <thead class="border-b font-medium dark:border-neutral-500">
+                    <table class="min-w-full text-sm font-light text-left">
+                        <thead class="font-medium border-b dark:border-neutral-500">
                             <tr>
                                 <th scope="col" class="px-6 py-4">#</th>
                                 <th scope="col" class="px-6 py-4">PRODUIT</th>
@@ -30,13 +30,17 @@
                         </thead>
                         <tbody>
                             @forelse ($ventes as $key=>$value )
+
+                            @php
+                                $number=$key+1;
+                            @endphp
                             <tr class="border-b dark:border-neutral-500">
-                            <td class="whitespace-nowrap px-6 py-4 font-medium">3</td>
-                            <td class="whitespace-nowrap px-6 py-4 font-medium">{{$value['product_name']}}</td>
-                            <td class="whitespace-nowrap px-6 py-4 font-medium">{{$value['qte_pc']}}</td>
-                            <td class="whitespace-nowrap px-6 py-4 font-medium">{{$value['montant']}}</td>
-                            <td class="whitespace-nowrap px-6 py-4 font-medium">{{$value['benefice']}}</td>
-                            <td class="whitespace-nowrap px-6 py-4 font-medium">{{$value['date_vente']}}</td>
+                            <td class="px-6 py-4 font-medium whitespace-nowrap">{{$number}}</td>
+                            <td class="px-6 py-4 font-medium whitespace-nowrap">{{$value['product_name']}}</td>
+                            <td class="px-6 py-4 font-medium whitespace-nowrap">{{$value['qte_pc']}}</td>
+                            <td class="px-6 py-4 font-medium whitespace-nowrap">{{$value['montant']}}</td>
+                            <td class="px-6 py-4 font-medium whitespace-nowrap">{{$value['benefice']}}</td>
+                            <td class="px-6 py-4 font-medium whitespace-nowrap">{{$value['date_vente']}}</td>
 
 
 

@@ -19,8 +19,8 @@ class vente extends Model
 
     protected $casts=[
         'date_vente'=>'date',
-
-
+        'montant'=>'flaot',
+        'benefice'=>'flaot',
         ];
 
         public function histoPrix()

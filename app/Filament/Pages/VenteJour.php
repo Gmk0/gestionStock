@@ -19,6 +19,7 @@ use Filament\Notifications\Notification;
 use Filament\Forms\Components\{Select, DatePicker};
 use Filament\Forms\Components\Section;
 use Filament\Support\RawJs;
+use Illuminate\Support\Facades\DB;
 
 class VenteJour extends Page implements HasForms
 {
@@ -161,24 +162,44 @@ class VenteJour extends Page implements HasForms
                 ->body('Le tableau de ventes est vide.')
                 ->send();
         } else {
-            // Le tableau n'est pas vide, continuez avec la validation
-            foreach ($this->ventes as $venteData) {
-                // Crée une nouvelle instance du modèle Vente
-                $vente = new Vente;
 
-                // Remplit le modèle avec les données de la vente
-                $vente->fill($venteData);
+            try{
 
-                // Sauvegarde le modèle dans la base de données
-                $vente->save();
+                DB::beginTransaction();
+                // Le tableau n'est pas vide, continuez avec la validation
+                foreach ($this->ventes as $venteData) {
+                    // Crée une nouvelle instance du modèle Vente
+                    $vente = new Vente;
 
+                    // Remplit le modèle avec les données de la vente
+                    $vente->fill($venteData);
+
+                    // Sauvegarde le modèle dans la base de données
+                    $vente->save();
+
+
+
+                    $this->ventes = [];
+                }
+
+                DB::commit();
                 Notification::make()
                 ->success()
-                ->title('Sauvegarder avec succees')
-                ->send();
+                    ->title('Sauvegarder avec succees')
+                    ->send();
 
-                $this->ventes=[];
+            }catch(\Exception $e){
+                DB::rollBack();
+
+                Notification::make()
+                    ->danger()
+                    ->title('erreur')
+                    ->body($e->getMessage())
+                    ->send();
+
+
             }
+
         }
     }
 
