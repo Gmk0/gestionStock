@@ -151,6 +151,12 @@ class VenteJour extends Page implements HasForms
         $this->benefice = 0;
     }
 
+    public function remove($key)
+    {
+        if (array_key_exists($key, $this->ventes)) {
+            unset($this->ventes[$key]);
+        }
+    }
 
     public function validation()
     {

@@ -26,6 +26,7 @@
                                 <th scope="col" class="px-6 py-4">Montant</th>
                                 <th scope="col" class="px-6 py-4">Benefice</th>
                                 <th scope="col" class="px-6 py-4">Date</th>
+                                <th scope="col" class="px-6 py-4">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,7 +42,10 @@
                             <td class="px-6 py-4 font-medium whitespace-nowrap">{{$value['montant']}}</td>
                             <td class="px-6 py-4 font-medium whitespace-nowrap">{{$value['benefice']}}</td>
                             <td class="px-6 py-4 font-medium whitespace-nowrap">{{$value['date_vente']}}</td>
+                            <td class="px-6 py-4 font-medium whitespace-nowrap">
 
+                                <x-filament::icon-button wire:click='remove({{$key}})' icon="heroicon-m-trash" size="sm" label="New label" />
+                            </td>
 
 
 
