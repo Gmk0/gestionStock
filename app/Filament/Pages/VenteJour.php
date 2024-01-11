@@ -34,6 +34,7 @@ class VenteJour extends Page implements HasForms
     public $qte_pc;
     public $date_vente;
     public $produit_id;
+    public $qte_pqt;
 
     public $benefice=null;
 
@@ -53,22 +54,21 @@ class VenteJour extends Page implements HasForms
                 Select::make('produit_id')->label('Produit')
                     ->options(Produit::all()->pluck('nom', 'id'))
                     ->native(false),
-                TextInput::make('qte_pc')
+                TextInput::make('qte_pqt')
+                ->label('quantite en paquet')
                     ->live()
                     ->numeric(),
                 Select::make('prix')
-                ->options(HistoPrix::all()->pluck('prix_unit', 'prix_unit'))
+                ->options(HistoPrix::all()->pluck('prix_pqt', 'prix_pqt'))
                 ->live()
                 ->native(false),
                 TextInput::make('montant')
-                    ->mask(RawJs::make('$money($input)'))
-                    ->stripCharacters(',')
-                    ->numeric()
-                    ->required(),
+                    ->currencyMask(thousandSeparator: ',', decimalSeparator: '.', precision: 2)
+                    ->required()
+                  ,
                 TextInput::make('benefice')
-                    ->mask(RawJs::make('$money($input)'))
-                    ->stripCharacters(',')
-                    ->numeric(),
+                    ->currencyMask(thousandSeparator: ',', decimalSeparator: '.', precision: 2)
+                    ,
                 DatePicker::make('date_vente')
                 ->required(),
 
@@ -79,7 +79,7 @@ class VenteJour extends Page implements HasForms
 
     public function updatingPrix($value)
     {
-        $this->montant=$value * $this->qte_pc;
+        $this->montant=$value * $this->qte_pqt;
 
 
     }
@@ -95,20 +95,21 @@ class VenteJour extends Page implements HasForms
         try{
 
 
-            $price = HistoPrix::where('prix_unit', $this->prix)->first();
+            $price = HistoPrix::where('prix_pqt', $this->prix)->first();
             $product_name=Produit::find($this->produit_id);
+            $qte_pc=$this->qte_pqt *12;
 
 
             if(empty($this->benefice) && !empty($price))
             {
-                $this->benefice= $this->qte_pc * $price->benefice;
+                $this->benefice= $qte_pc * $price->benefice;
             }
             $data =
                 [
                     'produit_id' => $this->produit_id,
                     'product_name'=> $product_name->nom,
-                    'qte_pc' => $this->qte_pc,
-                    'qte_pqt' =>round($this->qte_pc / 12),
+                    'qte_pc' => $qte_pc,
+                    'qte_pqt' =>$this->qte_pqt,
                     'montant'=>$this->montant,
                     'benefice'=>$this->benefice,
                     'histoPrix_id' => $price->id??null,
@@ -145,8 +146,9 @@ class VenteJour extends Page implements HasForms
     function resetAll()
     {
 
-     $this->reset('montant','benefice', 'produit_id', 'qte_pc', 'prix', 'date_vente');
-     $this->montant=null;
+     $this->reset('montant', 'qte_pqt','benefice', 'produit_id', 'qte_pc', 'prix', 'date_vente');
+     $this->montant=0;
+        $this->benefice = 0;
     }
 
 

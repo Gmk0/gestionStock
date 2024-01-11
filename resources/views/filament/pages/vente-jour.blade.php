@@ -37,7 +37,7 @@
                             <tr class="border-b dark:border-neutral-500">
                             <td class="px-6 py-4 font-medium whitespace-nowrap">{{$number}}</td>
                             <td class="px-6 py-4 font-medium whitespace-nowrap">{{$value['product_name']}}</td>
-                            <td class="px-6 py-4 font-medium whitespace-nowrap">{{$value['qte_pc']}}</td>
+                            <td class="px-6 py-4 font-medium whitespace-nowrap">{{$value['qte_pqt']}}</td>
                             <td class="px-6 py-4 font-medium whitespace-nowrap">{{$value['montant']}}</td>
                             <td class="px-6 py-4 font-medium whitespace-nowrap">{{$value['benefice']}}</td>
                             <td class="px-6 py-4 font-medium whitespace-nowrap">{{$value['date_vente']}}</td>

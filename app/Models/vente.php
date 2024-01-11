@@ -19,7 +19,7 @@ class vente extends Model
 
     protected $casts=[
         'date_vente'=>'date',
-        'montant'=>'floAt',
+        'montant'=>'float',
         'benefice'=>'float',
         ];
 
